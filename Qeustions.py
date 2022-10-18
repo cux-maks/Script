@@ -1,97 +1,97 @@
-# 20221009 최상규 Question
+# # 20221009 최상규 Question
 
-MAZE_SIZE = 11
-map = [['1','1','0','1','1','1','1','1','1','1','0'],
-       ['e','0','0','0','0','0','0','0','0','1','1'],
-       ['1','1','1','0','1','1','0','1','0','0','1'],
-       ['1','1','1','0','0','1','0','1','1','0','1'],
-       ['0','1','1','0','1','1','0','1','0','0','x'],
-       ['0','1','0','0','1','1','0','1','1','1','0'],
-       ['0','1','1','1','1','1','0','0','0','0','1'],
-       ['0','1','0','0','0','0','1','1','0','1','1'],
-       ['0','1','0','1','1','0','0','0','0','1','0'],
-       ['0','1','1','1','0','0','1','1','1','1','0'],
-       ['1','1','1','1','1','1','1','1','1','1','0']]
+# MAZE_SIZE = 11
+# map = [['1','1','0','1','1','1','1','1','1','1','0'],
+#        ['e','0','0','0','0','0','0','0','0','1','1'],
+#        ['1','1','1','0','1','1','0','1','0','0','1'],
+#        ['1','1','1','0','0','1','0','1','1','0','1'],
+#        ['0','1','1','0','1','1','0','1','0','0','x'],
+#        ['0','1','0','0','1','1','0','1','1','1','0'],
+#        ['0','1','1','1','1','1','0','0','0','0','1'],
+#        ['0','1','0','0','0','0','1','1','0','1','1'],
+#        ['0','1','0','1','1','0','0','0','0','1','0'],
+#        ['0','1','1','1','0','0','1','1','1','1','0'],
+#        ['1','1','1','1','1','1','1','1','1','1','0']]
 
-class CircularQueue:
-    def __init__(self, capacity):
-        self.capacity = capacity
-        self.front = 0
-        self.rear = 0
-        self.items = [None] * capacity
+# class CircularQueue:
+#     def __init__(self, capacity):
+#         self.capacity = capacity
+#         self.front = 0
+#         self.rear = 0
+#         self.items = [None] * capacity
 
-    def print(self):
-        return self.items
+#     def print(self):
+#         return self.items
 
-    def isEmpty(self):
-        return self.front == self.rear
+#     def isEmpty(self):
+#         return self.front == self.rear
 
-    def isFull(self):
-        return self.front == (self.rear + 1) % self.capacity
+#     def isFull(self):
+#         return self.front == (self.rear + 1) % self.capacity
 
-    def clear(self):
-        self.front = self.rear
+#     def clear(self):
+#         self.front = self.rear
 
-    def enqueue(self, item):
-        if not self.isFull():
-            # self.rear = (self.rear + 1) & self.capacity
-            self.items[self.rear] = item
-            self.rear += 1
-            # print("enqueue value: ", self.rear - 1, self.items[self.rear - 1])
+#     def enqueue(self, item):
+#         if not self.isFull():
+#             # self.rear = (self.rear + 1) & self.capacity
+#             self.items[self.rear] = item
+#             self.rear += 1
+#             # print("enqueue value: ", self.rear - 1, self.items[self.rear - 1])
 
-    def dequeue(self):
-        if not self.isEmpty():
-            # self.front = (self.front + 1) & self.capacity
-            self.front += 1
-            return self.items[self.front - 1]
+#     def dequeue(self):
+#         if not self.isEmpty():
+#             # self.front = (self.front + 1) & self.capacity
+#             self.front += 1
+#             return self.items[self.front - 1]
 
-    def peek(self):
-        if not self.isEmpty():
-            return self.items[(self.front + 1) % self.capacity]
+#     def peek(self):
+#         if not self.isEmpty():
+#             return self.items[(self.front + 1) % self.capacity]
 
-    def size(self):
-        return (self.rear - self.front + self.capacity) % self.capacity
+#     def size(self):
+#         return (self.rear - self.front + self.capacity) % self.capacity
 
-    # def print(self):
-    #     print(self.items)
+#     # def print(self):
+#     #     print(self.items)
 
-def isValidPos(x, y, map):
-    if x < 0 or y < 0 or x >= MAZE_SIZE or y >= MAZE_SIZE:
-        return False
-    else:
-        return map[y][x] == '0' or map[y][x] == 'x'
+# def isValidPos(x, y, map):
+#     if x < 0 or y < 0 or x >= MAZE_SIZE or y >= MAZE_SIZE:
+#         return False
+#     else:
+#         return map[y][x] == '0' or map[y][x] == 'x'
 
-def BFS():
-    que = CircularQueue(50)
-    que.enqueue((0,1))
-    print('BFS: ')
+# def BFS():
+#     que = CircularQueue(50)
+#     que.enqueue((0,1))
+#     print('BFS: ')
     
-    while que.isEmpty() != True:
-        here = que.dequeue()
-        print(here, end='->')
-        x, y = here
-        if (map[y][x] == 'x'):
-            return True
-        else:
-            map[y][x] = '.'
-            if isValidPos(x, y - 1, map) : #상
-                que.enqueue((x, y - 1))
-            if isValidPos(x, y + 1, map) : #하
-                que.enqueue((x, y + 1))
-            if isValidPos(x - 1, y, map) : #좌
-                que.enqueue((x - 1, y))
-            if isValidPos(x + 1, y, map) : #우
-                que.enqueue((x + 1, y))
-        #print('현재스택 : ',end='')
-        #for x in range (que.size()):
-           # if (que.items[x] != None):
-               # print(que.items[x],end='')
-        #print('')
-    return False
+#     while que.isEmpty() != True:
+#         here = que.dequeue()
+#         print(here, end='->')
+#         x, y = here
+#         if (map[y][x] == 'x'):
+#             return True
+#         else:
+#             map[y][x] = '.'
+#             if isValidPos(x, y - 1, map) : #상
+#                 que.enqueue((x, y - 1))
+#             if isValidPos(x, y + 1, map) : #하
+#                 que.enqueue((x, y + 1))
+#             if isValidPos(x - 1, y, map) : #좌
+#                 que.enqueue((x - 1, y))
+#             if isValidPos(x + 1, y, map) : #우
+#                 que.enqueue((x + 1, y))
+#         #print('현재스택 : ',end='')
+#         #for x in range (que.size()):
+#            # if (que.items[x] != None):
+#                # print(que.items[x],end='')
+#         #print('')
+#     return False
 
-result1 = BFS()
-if result1 : print(' --> 미로탐색 성공')
-else: print(' --> 미로탐색 실패')
+# result1 = BFS()
+# if result1 : print(' --> 미로탐색 성공')
+# else: print(' --> 미로탐색 실패')
 
 # 20221002 홍민이형 Question
 # map = [ ['1','1','1','1','1','1'],
