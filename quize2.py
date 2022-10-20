@@ -1,3 +1,8 @@
+'''
+1) 주어진 임의의 사전에서 values를 기준으로 내림차순 key-value 쌍 5개, 오름차순 key-value 쌍 5개.
+2) 주어진 임의의 사전에서 keys를 기준으로 사전에서 내림차순 key-value 쌍 5개, 오름차순 key-value 쌍 5개.
+'''
+
 import operator
 
 prices = {

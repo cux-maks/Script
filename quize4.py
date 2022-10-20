@@ -1,3 +1,12 @@
+'''
+Plus to Minus
+"plus"라는 이름의 파일을 읽기
+읽어 온 내용 중 + 연산자는 모두 - 연산자로 대체하여 "minus"라는 새로운 파일 만들기
+"minus" 파일은 "/content/temp4/temp5/temp6" 폴더에 생성되어야 함
+"minus_solution" 이라는 파일을 생성하여 "minus" 파일 내용 중 "<?>"에 들어가야 할 정답만 따로 쓸 것
+"minus_solution" 파일 역시 "/content/temp4/temp5/temp6" 폴더 아래에 생성되어야 함
+'''
+
 import os
 import random
 
