@@ -3,7 +3,7 @@
 2) 주어진 임의의 사전에서 keys를 기준으로 사전에서 내림차순 key-value 쌍 5개, 오름차순 key-value 쌍 5개.
 '''
 
-import operator
+import operator as op
 
 prices = {
   'ABC': 89.23,
@@ -18,12 +18,14 @@ prices = {
   'NEXON': 56.02,
 }
 
-prices_key = sorted(prices.items())
-print("key sort 하위 5개: ", prices_key[0:5])
+print("\n\n", prices, "\n\n", type(prices), "\n\n")
+
+prices_key = sorted(prices.items(), key=op.itemgetter(0))
+print("key sort 하위 5개: ", prices_key[0:5], type(prices_key))
 prices_key = prices_key[::-1]
 print("key sort 상위 5개: ", prices_key[0:5])
 
-prices_value = sorted(prices.items(), key=operator.itemgetter(1))
-print("value sort 하위 5개: ", prices_value[0:5])
+prices_value = sorted(prices.items(), key=op.itemgetter(1))
+print("value sort 하위 5개: ", prices_value[0:5], type(prices_value))
 prices_value = prices_value[::-1]
 print("value sort 하위 5개: ", prices_value[0:5])

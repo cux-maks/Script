@@ -13,23 +13,27 @@ def my_func(a):
 
 def my_func2(a, key):
 
-    def item_value(item, key):
-        values = []
-        for _key in key:
-            values.append(item.get(_key))
+    # print("def my_func2:", a, key)
+
+    def item_value(item, key): # dict 자료형에서 특정 key에 대한 value만 뽑아서 tuple로 반환하는 함수
+        values = [] # 이 함수의 반환값을 저장할 list
+        for _key in key: # key에서 한 개씩 불러와서 _key에 대입
+            values.append(item.get(_key)) # values에 item에서 _key값에 해당하는 데이터 append
+            # print("print_def_item_value:", values)
         return tuple(values)
 
-    result = []
-    seen = set()
+    result = [] # 이 함수의 반환값 저장할 list
+    seen = set() # 본 적 있는놈 저장하는 set 자료형
 
-    for items in a:
-        val = items if key is None else item_value(items, key)
-        if val not in seen:
-            result.append(items)
-            seen.add(val)
-        elif val == (None, ):
-            result.append(items)
-    return result    
+    for items in a: # 전달받은 dict 자료형에서 한개씩 뽑아오며 반복
+       #  print("for_items_in_a:", items)
+        val = items if key is None else item_value(items, key) # val은 만약 key값이 None이라면 items, 그게 아니라면 item_value(items, key)를 실행한 결과를 저장
+        if val not in seen: # 만약 val값이 이전에 본 아이템이 아니다
+            result.append(items) # 결과 리스트에 items 추가
+            seen.add(val) # 본 적 있는놈에도 추가
+        elif val == (None, ): # 만약 val값이 tuple이긴 한데,,,, (None, ) 이다
+            result.append(items) # 결과 리스트에 items 추가
+    return result # 결과 리스트 반환
 
 x = [1, 5, 2, 1, 9, 1, 5, 10]
 y = ['a', 'bc', 'a', 'b_', 123, 78, 'bc', '123', 123, 'b']
