@@ -4,24 +4,24 @@ import time
 import copy
 import os
 
-grid = list()
-map_size = {"작음" : 4, "중간" : 6, "큼" : 8, "짱큼" : 10}
-dif = {"쉬움" : 0, "중간" : 1, "어려움" : 2, "극악" : 3}
+grid = list() # 맵
+map_size = {"작음" : 4, "중간" : 5, "큼" : 6, "짱큼" : 7} # 맵 크기 dict
+dif = {"쉬움" : 0, "중간" : 1, "어려움" : 2, "극악" : 3} # 난이도 dict
 
-now_x = 0
-now_y = 0
+now_x = 0 # 현재위치(시작위치) 초기화
+now_y = 0 # 현재위치(시작위치) 초기화
 
-def Create_grid(n: int) -> None:
+def Create_grid(n: int) -> None: # 크기에 따른 맵 생성
     global grid
     grid = [[" " for _ in range(n)] for _ in range(n)]
 
-def Create_Start(x = 0, y = 0) -> None:
+def Create_Start(x = 0, y = 0) -> None: # 시작지점 설정
     global grid
-    grid[x][y] = "★"
+    grid[x][y] = "me"
 
-def Create_Goal(n) -> None:
+def Create_Goal(n) -> None: # 도착지점 설정
     global grid
-    grid[n - 1][n - 1] = "◆"
+    grid[n - 1][n - 1] = "goal"
 
 def Create_Hole(difficult: int, s: int) -> None:
     hole_num = [0.2, 0.3, 0.4, 0.5]
@@ -29,14 +29,14 @@ def Create_Hole(difficult: int, s: int) -> None:
     while hole_cnt < int(s*s*hole_num[difficult]):
         x = random.randrange(s)
         y = random.randrange(s)
-        if not grid[x][y] == "□" and not grid[x][y] == "◆" and not grid[x][y] == "★":
-            grid[x][y] = "□"
+        if not grid[x][y] == "hole" and not grid[x][y] == "goal" and not grid[x][y] == "me":
+            grid[x][y] = "hole"
             hole_cnt += 1
 
 def Delete_Hole(n: int) -> None:
     for x in range(n):
         for y in range(n):
-            if grid[x][y] == "□": grid[x][y] = " "
+            if grid[x][y] == "hole": grid[x][y] = " "
 
 def find_root(n: int) -> bool:
     visited = []
@@ -47,13 +47,13 @@ def find_root(n: int) -> bool:
     while not len(visited) == 0:
         here = visited.pop()
         (x, y) = here
-        if grid_test[x][y] == "◆": return True
+        if grid_test[x][y] == "goal": return True
         else:
-            grid_test[x][y] = "★"
-            if (x >= 0 and x < n and y - 1 >= 0 and y - 1 < n) and (grid_test[x][y - 1] == " " or grid_test[x][y - 1] == "◆"): visited.append((x, y - 1))
-            if (x - 1 >= 0 and x - 1 < n and y >= 0 and y < n) and (grid_test[x - 1][y] == " " or grid_test[x - 1][y] == "◆"): visited.append((x - 1, y))
-            if (x >= 0 and x < n and y + 1 >= 0 and y + 1 < n) and (grid_test[x][y + 1] == " " or grid_test[x][y + 1] == "◆"): visited.append((x, y + 1))
-            if (x + 1 >= 0 and x + 1 < n and y >= 0 and y < n) and (grid_test[x + 1][y] == " " or grid_test[x + 1][y] == "◆"): visited.append((x + 1, y))
+            grid_test[x][y] = "me"
+            if (x >= 0 and x < n and y - 1 >= 0 and y - 1 < n) and (grid_test[x][y - 1] == " " or grid_test[x][y - 1] == "goal"): visited.append((x, y - 1))
+            if (x - 1 >= 0 and x - 1 < n and y >= 0 and y < n) and (grid_test[x - 1][y] == " " or grid_test[x - 1][y] == "goal"): visited.append((x - 1, y))
+            if (x >= 0 and x < n and y + 1 >= 0 and y + 1 < n) and (grid_test[x][y + 1] == " " or grid_test[x][y + 1] == "goal"): visited.append((x, y + 1))
+            if (x + 1 >= 0 and x + 1 < n and y >= 0 and y < n) and (grid_test[x + 1][y] == " " or grid_test[x + 1][y] == "goal"): visited.append((x + 1, y))
 
     return False
 
@@ -87,16 +87,16 @@ def change_position(n: int) -> str:
     ret = "None"
     for x in range(n):
         for y in range(n):
-            if grid[x][y] == "★": grid[x][y] = " "
+            if grid[x][y] == "me": grid[x][y] = " "
 
-    if grid[now_y][now_x] == "□":
-        grid[now_y][now_x] = "☆"
+    if grid[now_y][now_x] == "hole":
+        grid[now_y][now_x] = "die"
         ret = "Game Over"
-    elif grid[now_y][now_x] == "◆":
-        grid[now_y][now_x] = "★"
+    elif grid[now_y][now_x] == "goal":
+        grid[now_y][now_x] = "clear"
         ret = "Game Clear"
     elif grid[now_y][now_x] == " ":
-        grid[now_y][now_x] = "★"
+        grid[now_y][now_x] = "me"
 
     return ret
 
@@ -104,16 +104,58 @@ def print_grid(diff: str, gm: int, grid_s: int) -> None:
     os.system("cls")
     gm_list = ["직접 플레이", "랜덤 입력"]
     print(f"난이도: {diff} / 게임모드: {gm_list[gm]} / 맵 크기 {grid_s} x {grid_s}")
-    print(" "+ "ㅡ" * grid_s * 2)
+    print()
+    print("  " + "🧱" * (6 * grid_s + 1))
     for x in grid:
-        print("| ", end = "")
-        for y in x:
-            print(y, end = " | ")
+        print("  🧱  ", end = "")
+        for item in x:
+            if item == " ":
+                print("      ", end = "")
+            elif item == "hole":
+                print("☣    ☣", end = "")
+            elif item == "goal":
+                print("💊  💊", end = "")
+            elif item == "me":
+                print("  😷  ", end = "")
+            elif item == "die":
+                print("  😵  ", end = "")
+            elif item == "clear":
+                print("  😄  ", end = "")
+            print("  🧱  ", end = "")
         print()
-        print(" " + "ㅡ" * grid_s * 2)
-    print("너: ★")
-    print("함정: □")
-    print("목표: ◆")
+        print("  🧱  ", end = "")
+        for item in x:
+            if item == " ":
+                print("      ", end = "")
+            elif item == "hole":
+                print("  🦠  ", end = "")
+            elif item == "goal":
+                print("  💉  ", end = "")
+            elif item == "me":
+                print("👋🥼🤜", end = "")
+            elif item == "die":
+                print("☠ 🥋 ☠", end = "")
+            elif item == "clear":
+                print("👋🥼🤳", end = "")
+            print("  🧱  ", end = "")
+        print()
+        print("  🧱  ", end = "")
+        for item in x:
+            if item == " ":
+                print("      ", end = "")
+            elif item == "hole":
+                print("☣    ☣", end = "")
+            elif item == "goal":
+                print("💊  💊", end = "")
+            elif item == "me":
+                print(" 👞👞 ", end = "")
+            elif item == "die":
+                print(" ☠  ☠ ", end = "")
+            elif item == "clear":
+                print(" 👞👞 ", end = "")
+            print("  🧱  ", end = "")
+        print()
+        print("  " + "🧱" * (6 * grid_s + 1))
 
 while True:
 
@@ -156,11 +198,7 @@ while True:
     while True:
         Delete_Hole(map_size[input_mapSize])
         Create_Hole(n, map_size[input_mapSize])
-        # print_grid(input_dif, 0)
-        # time.sleep(0.2)
         if find_root(map_size[input_mapSize]): break
-
-    # print_grid()
 
     while True:
 
@@ -180,7 +218,7 @@ while True:
     print()
 
     print("게임을 시작합니다....")
-    time.sleep(3)
+    time.sleep(1)
     os.system("cls")
     print_grid(input_dif, gameMode - 1, map_size[input_mapSize])
 
@@ -190,19 +228,19 @@ while True:
         if gameMode == 1:
             move(getKey(), map_size[input_mapSize])
         elif gameMode == 2:
-            move(getKey_random())
+            move(getKey_random(), map_size[input_mapSize])
             time.sleep(0.5)
         val = change_position(map_size[input_mapSize])
         print_grid(input_dif, gameMode - 1, map_size[input_mapSize])
         if val == "Game Over":
             print("Game Over....")
-            print("다시 시작하시겠습니까? (Y/N)")
+            print("다시 시작하시겠습니까? (네/아니요)")
             re_val = str(input())
             break
         elif val == "Game Clear":
             print("Game Clear!!")
-            print("새로운 게임을 시작하시겠습니까? (Y/N)")
+            print("새로운 게임을 시작하시겠습니까? (네/아니요)")
             re_val = str(input())
             break
     
-    if re_val == "N": break
+    if re_val == "아니요": break
