@@ -112,6 +112,22 @@ def print_grid(diff: str, gm: int, grid_s: int) -> None:
             if item == " ":
                 print("      ", end = "")
             elif item == "hole":
+                print("      ", end = "")
+            elif item == "goal":
+                print("      ", end = "")
+            elif item == "me":
+                print("      ", end = "")
+            elif item == "die":
+                print("      ", end = "")
+            elif item == "clear":
+                print("      ", end = "")
+            print("  🧱  ", end = "")
+        print()
+        print("  🧱  ", end = "")
+        for item in x:
+            if item == " ":
+                print("      ", end = "")
+            elif item == "hole":
                 print("☣    ☣", end = "")
             elif item == "goal":
                 print("💊  💊", end = "")
@@ -153,6 +169,22 @@ def print_grid(diff: str, gm: int, grid_s: int) -> None:
                 print(" ☠  ☠ ", end = "")
             elif item == "clear":
                 print(" 👞👞 ", end = "")
+            print("  🧱  ", end = "")
+        print()
+        print("  🧱  ", end = "")
+        for item in x:
+            if item == " ":
+                print("      ", end = "")
+            elif item == "hole":
+                print("      ", end = "")
+            elif item == "goal":
+                print("      ", end = "")
+            elif item == "me":
+                print("      ", end = "")
+            elif item == "die":
+                print("      ", end = "")
+            elif item == "clear":
+                print("      ", end = "")
             print("  🧱  ", end = "")
         print()
         print("  " + "🧱" * (6 * grid_s + 1))

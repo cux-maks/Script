@@ -1,136 +1,136 @@
-# 20221023 박주을 Question
+# # 20221023 박주을 Question
 
-#교재 6.5절의 이중연결구조로 덱 구현하고, 후단을 스택으로 사용하여 깊이우선탐색에 적용
+# #교재 6.5절의 이중연결구조로 덱 구현하고, 후단을 스택으로 사용하여 깊이우선탐색에 적용
 
-class DNode:
-    def __init__(self, elem, prev = None, next = None):
-        self.data = elem
-        self.prev = prev
-        self.next = next
+# class DNode:
+#     def __init__(self, elem, prev = None, next = None):
+#         self.data = elem
+#         self.prev = prev
+#         self.next = next
 
-class DoublyLinkedDeque:
-    def __init__(self):
-        self.front = None
-        self.array = []
-        self.top = None
+# class DoublyLinkedDeque:
+#     def __init__(self):
+#         self.front = None
+#         self.array = []
+#         self.top = None
 
-    def isEmpty(self):
-        return self.front == None
+#     def isEmpty(self):
+#         return self.front == None
 
-    def clear(self):
-        self.front = self.front = None
+#     def clear(self):
+#         self.front = self.front = None
 
-    def size(self):
-        node = self.front
-        count = 0
-        while not node == None:
-            node = node.next
-            count += 1
-        return count
+#     def size(self):
+#         node = self.front
+#         count = 0
+#         while not node == None:
+#             node = node.next
+#             count += 1
+#         return count
 
-    def display(self, msg):
-        print(msg, end='')
-        node = self.front
-        while not node == None:
-            print(node.data, end='')
-            node = node.next
-        print()
+#     def display(self, msg):
+#         print(msg, end='')
+#         node = self.front
+#         while not node == None:
+#             print(node.data, end='')
+#             node = node.next
+#         print()
 
-    def disp_list(self):
-        node = self.front
-        ret_val = []
-        while not node == None:
-            ret_val.append(node.data)
-            node = node.next
-        return ret_val
+#     def disp_list(self):
+#         node = self.front
+#         ret_val = []
+#         while not node == None:
+#             ret_val.append(node.data)
+#             node = node.next
+#         return ret_val
 
-    def addFront(self, item):
-        node = DNode(item, None, self.front)
-        if (self.isEmpty()):
-            self.front = self.top = node
-        else:
-            self.front.prev = node
-            self.front = node
+#     def addFront(self, item):
+#         node = DNode(item, None, self.front)
+#         if (self.isEmpty()):
+#             self.front = self.top = node
+#         else:
+#             self.front.prev = node
+#             self.front = node
 
-    def addRear(self, item):
-        node = DNode(item, self.top, None)
-        if (self.isEmpty()):
-            self.front = self.top = node
-        else:
-            self.top.next = node
-            self.top = node
+#     def addRear(self, item):
+#         node = DNode(item, self.top, None)
+#         if (self.isEmpty()):
+#             self.front = self.top = node
+#         else:
+#             self.top.next = node
+#             self.top = node
 
-    def deleteFront(self):
-        if not self.isEmpty():
-            data = self.front.data
-            self.front = self.front.next
-            if self.front == None:
-                self.top = None
-            else:
-                self.front.prev = None
-            return data
+#     def deleteFront(self):
+#         if not self.isEmpty():
+#             data = self.front.data
+#             self.front = self.front.next
+#             if self.front == None:
+#                 self.top = None
+#             else:
+#                 self.front.prev = None
+#             return data
 
-    def deleteRear(self):
-        if not self.isEmpty():
-            data = self.top.data
-            self.top = self.top.prev
-            if self.top == None:
-                self.front = None
-            else:
-                self.top.next = None
-            return data
+#     def deleteRear(self):
+#         if not self.isEmpty():
+#             data = self.top.data
+#             self.top = self.top.prev
+#             if self.top == None:
+#                 self.front = None
+#             else:
+#                 self.top.next = None
+#             return data
 
-# ----------------------------------------------------------------
+# # ----------------------------------------------------------------
 
-MAZE_SIZE_X = 10
-MAZE_SIZE_Y = 12
-map = [['1', '1', '1', '1', '1', '1', '1', '1', '1', '1'],
-       ['1', '1', '1', '1', '1', '1', '0', '1', '0', '1'],
-       ['1', '1', '1', '1', '1', '1', '0', '0', '0', '1'],
-       ['1', '1', '1', '1', '1', '1', '1', '1', '0', '1'],
-       ['1', '1', '1', '1', '1', '1', '1', '0', '0', 'x'],
-       ['1', '1', '0', '0', '1', '1', '0', '0', '1', '1'],
-       ['1', '1', '1', '0', '0', '0', '0', '1', '1', '1'],
-       ['1', '1', '1', '0', '1', '1', '1', '1', '1', '1'],
-       ['1', '1', '1', '0', '1', '1', '1', '1', '1', '1'],
-       ['e', '0', '1', '0', '1', '1', '1', '1', '1', '1'],
-       ['1', '0', '0', '0', '0', '0', '0', '1', '1', '1'],
-       ['1', '1', '1', '1', '1', '1', '1', '1', '1', '1']]
+# MAZE_SIZE_X = 10
+# MAZE_SIZE_Y = 12
+# map = [['1', '1', '1', '1', '1', '1', '1', '1', '1', '1'],
+#        ['1', '1', '1', '1', '1', '1', '0', '1', '0', '1'],
+#        ['1', '1', '1', '1', '1', '1', '0', '0', '0', '1'],
+#        ['1', '1', '1', '1', '1', '1', '1', '1', '0', '1'],
+#        ['1', '1', '1', '1', '1', '1', '1', '0', '0', 'x'],
+#        ['1', '1', '0', '0', '1', '1', '0', '0', '1', '1'],
+#        ['1', '1', '1', '0', '0', '0', '0', '1', '1', '1'],
+#        ['1', '1', '1', '0', '1', '1', '1', '1', '1', '1'],
+#        ['1', '1', '1', '0', '1', '1', '1', '1', '1', '1'],
+#        ['e', '0', '1', '0', '1', '1', '1', '1', '1', '1'],
+#        ['1', '0', '0', '0', '0', '0', '0', '1', '1', '1'],
+#        ['1', '1', '1', '1', '1', '1', '1', '1', '1', '1']]
 
-def isValidPos(map, x, y):
-    if x < 0 or y < 0 or x >= MAZE_SIZE_X or y >= MAZE_SIZE_Y:
-        return False
-    elif map[y][x] == '0' or map[y][x] == 'x':
-        return True
+# def isValidPos(map, x, y):
+#     if x < 0 or y < 0 or x >= MAZE_SIZE_X or y >= MAZE_SIZE_Y:
+#         return False
+#     elif map[y][x] == '0' or map[y][x] == 'x':
+#         return True
 
-def DFS():
-    stack = DoublyLinkedDeque()
-    stack.addRear((0, 9))
-    print('DFS: ')
+# def DFS():
+#     stack = DoublyLinkedDeque()
+#     stack.addRear((0, 9))
+#     print('DFS: ')
 
-    while not stack.isEmpty():
-        here = stack.deleteRear()
-        print(here, end='->')
-        (x, y) = here
-        if (map[y][x] == 'x'):
-            map[y][x] = '.'
-            return True
-        else:
-            map[y][x] = '.'
-            if isValidPos(map, x, y - 1): stack.addRear((x, y - 1))
-            if isValidPos(map, x, y + 1): stack.addRear((x, y + 1))
-            if isValidPos(map, x - 1, y): stack.addRear((x - 1, y))
-            if isValidPos(map, x + 1, y): stack.addRear((x + 1, y))
-        print(' 현재 스택 :', stack.disp_list())
-        # print(' 현재 스택 : ', list(filter(None, stack.array)))
-    return False
+#     while not stack.isEmpty():
+#         here = stack.deleteRear()
+#         print(here, end='->')
+#         (x, y) = here
+#         if (map[y][x] == 'x'):
+#             map[y][x] = '.'
+#             return True
+#         else:
+#             map[y][x] = '.'
+#             if isValidPos(map, x, y - 1): stack.addRear((x, y - 1))
+#             if isValidPos(map, x, y + 1): stack.addRear((x, y + 1))
+#             if isValidPos(map, x - 1, y): stack.addRear((x - 1, y))
+#             if isValidPos(map, x + 1, y): stack.addRear((x + 1, y))
+#         print(' 현재 스택 :', stack.disp_list())
+#         # print(' 현재 스택 : ', list(filter(None, stack.array)))
+#     return False
 
-if __name__ == '__main__':
-    result = DFS()
-    if result:
-        print(' --> 미로탐색 성공\n')
-    else:
-        print(' --> 미로탐색 실패\n')
+# if __name__ == '__main__':
+#     result = DFS()
+#     if result:
+#         print(' --> 미로탐색 성공\n')
+#     else:
+#         print(' --> 미로탐색 실패\n')
 
 # # 20221009 최상규 Question
 
