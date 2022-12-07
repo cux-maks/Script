@@ -336,13 +336,10 @@ while True:
 
     Create_Start()
     Create_Goal(map_size[input_mapSize])
-    print("장애물 생성중", end = "")
     while True:
         Delete_Hole(map_size[input_mapSize])
         Create_Hole(n, map_size[input_mapSize])
         if find_root(map_size[input_mapSize]): break
-        print("..", end = "")
-        time.sleep(0.125)
 
     # time.sleep(1)
     os.system("cls")
