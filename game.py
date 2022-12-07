@@ -279,6 +279,19 @@ print('''
 print("시작하려면 아무 키나 누르시오")
 os.system("pause > null")
 
+os.system("cls")
+print('''
+2019년 겨울....
+한 바이러스가 나타나 전 세계를 뒤흔드는데....
+그 이름은 COVID-19 !!!
+COVID-19의 위험이 가득한 도시에서 백신을 찾아 떠나는 사람들...
+과연 무사히 백신을 찾을 수 있을까...?
+''')
+
+time.sleep(1)
+print("다음(아무 키 입력)")
+os.system("pause > null")
+
 while True:
 
     os.system("cls")
