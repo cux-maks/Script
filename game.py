@@ -102,7 +102,7 @@ def change_position(n: int) -> str:
 
 def print_grid(diff: str, gm: int, grid_s: int) -> None:
     os.system("cls")
-    gm_list = ["직접 플레이", "랜덤 입력"]
+    gm_list = ["직접 플레이", "직접 플레이(시간 측정)", "랜덤 입력"]
     print(f"난이도: {diff} / 게임모드: {gm_list[gm]} / 맵 크기 {grid_s} x {grid_s}")
     print()
     print("  " + "🧱" * (6 * grid_s + 1))
@@ -189,6 +189,91 @@ def print_grid(diff: str, gm: int, grid_s: int) -> None:
         print()
         print("  " + "🧱" * (6 * grid_s + 1))
 
+def print_clear():
+    print('''              
+                                                  
+                           .                                                                                                                            .                    
+                ~          . :     ~                                                                                                         ~          . :     ~            
+                           . :    .                                                                                                                     . :    .             
+               . *      .! . -   *$                                                                                                         . *      .! . -   *$             
+                  ,      ~ , .   .,                                                                                                            ,      ~ , .   .,             
+                , * ,      -    ~:                                                                                                           , * ,      -    ~:              
+                 = ~       ~    ==                                                                                                            = ~       ~    ==              
+                 !!=       !~   ,     ;                                                                                                       !!=       !~   ,     ;         
+                  $ ,    .-:;  ;:    $                                                                                                         $ ,    .-:;  ;:    $          
+                  .$*    !;;!  =!   ! .                                                                                                        .$*    !;;!  =!   ! .         
+         -         *~    $::*  -.  ,-        ~                                                                                        -         *~    $::*  -.  ,-        ~  
+          *~       -*;   =*,! .;   $      .!;                                                                                          *~       -*;   =*,! .;   $      .!;   
+            #     . !;   :;,! ;;  *      =$                                                                                              #     . !;   :;,! ;;  *      =$     
+          .  !:     !;;, .:~~ ;. -~.   :=~                                                                                             .  !:     !;;, .:~~ ;. -~.   :=~      
+      ;:. . ...=     =!--~~~~ :  *    *=                                                                                           ;:. . ...=     =!--~~~~ :  *    *=        
+         *$   $.=    .;; ~~:. ; ~    *=                                                                                               *$   $.=    .;; ~~:. ; ~    *=         
+           ,$- -!;..  !;  ~: ,, :  .*-      ;!-                                                                                         ,$- -!;..  !;  ~: ,, :  .*-      ;!- 
+             .*, !-,  .*~ ;- : ~  =!:    ;*~        _____   ___  ___  ___ _____   _____  _      _____   ___  ______  _  _                 .*, !-,  .*~ ;- : ~  =!:    ;*~    
+                ;.~-,  -=.~- -.  *;,  ~=;          |  __ \ / _ \ |  \/  ||  ___| /  __ \| |    |  ___| / _ \ | ___ \| || |                   ;.~-,  -=.~- -.  *;,  ~=;       
+                  - ;~,~#;,~ .. !,.=**,            | |  \// /_\ \| .  . || |__   | /  \/| |    | |__  / /_\ \| |_/ /| || |                     - ;~,~#;,~ .. !,.=**,         
+   ;!*==;-.        ..-,-:$--,-,:,*::,  .           | | __ |  _  || |\/| ||  __|  | |    | |    |  __| |  _  ||    / | || |      ;!*==;-.        ..-,-:$--,-,:,*::,  .        
+           ,;;*;*=*, ,.--!,-. ~-:--                | |_\ \| | | || |  | || |___  | \__/\| |____| |___ | | | || |\ \ |_||_|              ,;;*;*=*, ,.--!,-. ~-:--             
+                -~.-:~ ..,~, ,-.-:*$#$*$=;          \____/\_| |_/\_|  |_/\____/   \____/\_____/\____/ \_| |_/\_| \_|(_)(_)                   -~.-:~ ..,~, ,-.-:*$#$*$=;      
+       -!$#$$#=!!~-,,.,,.,--:*,::!:.,..                                                                                             -!$#$$#=!!~-,,.,,.,--:*,::!:.,..         
+     .-.          , ---.-,-~= :~::;;;*##:                                                                                         .-.          , ---.-,-~= :~::;;;*##:       
+             -;*!;:::=*;:~,-!$.                                                                                                           -;*!;:::=*;:~,-!$.                 
+         .**~.  ;=:,* -=~:: ;*=!                                                                                                      .**~.  ;=:,* -=~:: ;*=!                
+        !     $!    -!#.*-!  $ ~#                                                                                                    !     $!    -!#.*-!  $ ~#               
+             ,    ,$=.,# $.   = .#                                                                                                        ,    ,$=.,# $.   = .#              
+                 ;#: *#  #    ;.  =                                                                                                           ;#: *#  #    ;.  =             
+                =$   ~  .-~    @                                                                                                             =$   ~  .-~    @                
+               !=    :  ~      .                                                                                                            !=    :  ~      .                
+               :        #       -                                                                                                           :        #       -               
+                        =                                                                                                                            =                       
+    ''')
+
+def print_die():
+    print('''
+                uuuuuuu                                                                                                      uuuuuuu                    
+             uu$$$$$$$$$$$uu                                                                                              uu$$$$$$$$$$$uu               
+          uu$$$$$$$$$$$$$$$$$uu                                                                                        uu$$$$$$$$$$$$$$$$$uu            
+         u$$$$$$$$$$$$$$$$$$$$$u                                                                                      u$$$$$$$$$$$$$$$$$$$$$u           
+        u$$$$$$$$$$$$$$$$$$$$$$$u                                                                                    u$$$$$$$$$$$$$$$$$$$$$$$u          
+       u$$$$$$$$$$$$$$$$$$$$$$$$$u                                                                                  u$$$$$$$$$$$$$$$$$$$$$$$$$u         
+       u$$$$$$$$$$$$$$$$$$$$$$$$$u                                                                                  u$$$$$$$$$$$$$$$$$$$$$$$$$u         
+       u$$$$$$"   "$$$"   "$$$$$$u                                                                                  u$$$$$$"   "$$$"   "$$$$$$u         
+       "$$$$"      u$u       $$$$"                                                                                  "$$$$"      u$u       $$$$"         
+        $$$u       u$u       u$$$            __   __ _____  _   _  ______  _____  _____ ______                       $$$u       u$u       u$$$          
+        $$$u      u$$$u      u$$$            \ \ / /|  _  || | | | |  _  \|_   _||  ___||  _  \                      $$$u      u$$$u      u$$$          
+         "$$$$uu$$$   $$$uu$$$$"              \ V / | | | || | | | | | | |  | |  | |__  | | | |                       "$$$$uu$$$   $$$uu$$$$"           
+          "$$$$$$$"   "$$$$$$$"                \ /  | | | || | | | | | | |  | |  |  __| | | | |                        "$$$$$$$"   "$$$$$$$"            
+            u$$$$$$$u$$$$$$$u                  | |  \ \_/ /| |_| | | |/ /  _| |_ | |___ | |/ /  _  _  _                  u$$$$$$$u$$$$$$$u              
+             u$"$"$"$"$"$"$u                   \_/   \___/  \___/  |___/   \___/ \____/ |___/  (_)(_)(_)                  u$"$"$"$"$"$"$u               
+  uuu        $$u$ $ $ $ $u$$       uuu                                                                         uuu        $$u$ $ $ $ $u$$       uuu     
+ u$$$$        $$$$$u$u$u$$$       u$$$$                                                                       u$$$$        $$$$$u$u$u$$$       u$$$$    
+  $$$$$uu      "$$$$$$$$$"     uu$$$$$$                                                                        $$$$$uu      "$$$$$$$$$"     uu$$$$$$    
+u$$$$$$$$$$$uu    """""    uuuu$$$$$$$$$$                                                                    u$$$$$$$$$$$uu    """""    uuuu$$$$$$$$$$  
+$$$$"""$$$$$$$$$$uuu   uu$$$$$$$$$"""$$$"                                                                    $$$$"""$$$$$$$$$$uuu   uu$$$$$$$$$"""$$$"  
+ """      ""$$$$$$$$$$$uu ""$"""                                                                              """      ""$$$$$$$$$$$uu ""$"""           
+           uuuu ""$$$$$$$$$$uuu                                                                                         uuuu ""$$$$$$$$$$uuu            
+  u$$$uuu$$$$$$$$$uu ""$$$$$$$$$$$uuu$$$                                                                       u$$$uuu$$$$$$$$$uu ""$$$$$$$$$$$uuu$$$   
+  $$$$$$$$$$""""           ""$$$$$$$$$$$"                                                                      $$$$$$$$$$""""           ""$$$$$$$$$$$"  
+   "$$$$$"                      ""$$$$""                                                                        "$$$$$"                      ""$$$$""   
+     $$$"                         $$$$"                                                                           $$$"                         $$$$"    
+    ''')
+
+os.system("cls")
+print('''
+
+    _      _____ ______  _____ ______   _    _  _____ ______ ______   _____   ___  ___  ___ _____      _    
+ /\| |/\  |  __ \| ___ \|_   _||  _  \ | |  | ||  _  || ___ \|  _  \ |  __ \ / _ \ |  \/  ||  ___|  /\| |/\ 
+ \ ` ' /  | |  \/| |_/ /  | |  | | | | | |  | || | | || |_/ /| | | | | |  \// /_\ \| .  . || |__    \ ` ' / 
+|_     _| | | __ |    /   | |  | | | | | |/\| || | | ||    / | | | | | | __ |  _  || |\/| ||  __|  |_     _|
+ / , . \  | |_\ \| |\ \  _| |_ | |/ /  \  /\  /\ \_/ /| |\ \ | |/ /  | |_\ \| | | || |  | || |___   / , . \ 
+ \/|_|\/   \____/\_| \_| \___/ |___/    \/  \/  \___/ \_| \_||___/    \____/\_| |_/\_|  |_/\____/   \/|_|\/ 
+                                                                                                            
+                                                                                                            
+
+''')
+print("시작하려면 아무 키나 누르시오")
+os.system("pause > null")
+
 while True:
 
     os.system("cls")
@@ -224,23 +309,16 @@ while True:
 
     print()
 
-    Create_Start()
-    Create_Goal(map_size[input_mapSize])
-
-    while True:
-        Delete_Hole(map_size[input_mapSize])
-        Create_Hole(n, map_size[input_mapSize])
-        if find_root(map_size[input_mapSize]): break
-
     while True:
 
         print(f"게임 모드를 선택하시오. (번호 입력) (난이도: {input_dif})")
         print("1. 직접 플레이")
-        print("2. 랜덤 입력")
+        print("2. 직접 플레이(시간 측정)")
+        print("3. 랜덤 입력")
 
         gameMode = int(input())
 
-        if not gameMode == 1 and not gameMode == 2:
+        if not gameMode == 1 and not gameMode == 2 and not gameMode == 3:
             print("다시 입력하세요.")
             os.system("pause")
             os.system("cls")
@@ -250,29 +328,69 @@ while True:
     print()
 
     print("게임을 시작합니다....")
-    time.sleep(1)
+
+    Create_Start()
+    Create_Goal(map_size[input_mapSize])
+    print("장애물 생성중", end = "")
+    while True:
+        Delete_Hole(map_size[input_mapSize])
+        Create_Hole(n, map_size[input_mapSize])
+        if find_root(map_size[input_mapSize]): break
+        print("..", end = "")
+        time.sleep(0.125)
+
+    # time.sleep(1)
     os.system("cls")
     print_grid(input_dif, gameMode - 1, map_size[input_mapSize])
 
     ret_val = None
-
+    start_time = None
+    end_time = None
     while True:
         if gameMode == 1:
             move(getKey(), map_size[input_mapSize])
-        elif gameMode == 2:
+        elif gameMode == 3:
             move(getKey_random(), map_size[input_mapSize])
             time.sleep(0.5)
+        elif gameMode == 2:
+            if start_time == None: start_time = time.time()
+            move(getKey(), map_size[input_mapSize])
+
         val = change_position(map_size[input_mapSize])
         print_grid(input_dif, gameMode - 1, map_size[input_mapSize])
         if val == "Game Over":
-            print("Game Over....")
+            if end_time == None: end_time = time.time()
+            # print("Game Over....")
+            print_die()
+            if gameMode == 2: print(f"기록: {round(end_time - start_time, 3)}s")
             print("다시 시작하시겠습니까? (네/아니요)")
-            re_val = str(input())
+            while True:
+                re_val = str(input())
+                if not re_val == "네" and not re_val == "아니요":
+                    print("다시 입력하세요.")
+                    re_val = ""
+                else:
+                    ret_val = None
+                    start_time = None
+                    end_time = None
+                    break
             break
         elif val == "Game Clear":
-            print("Game Clear!!")
+            if end_time == None: end_time = time.time()
+            # print("Game Clear!!")
+            print_clear()
+            if gameMode == 2: print(f"기록: {round(end_time - start_time, 3)}s")
             print("새로운 게임을 시작하시겠습니까? (네/아니요)")
-            re_val = str(input())
+            while True:
+                re_val = str(input())
+                if not re_val == "네" and not re_val == "아니요":
+                    print("다시 입력하세요.")
+                    re_val = ""
+                else:
+                    ret_val = None
+                    start_time = None
+                    end_time = None
+                    break
             break
     
     if re_val == "아니요": break
