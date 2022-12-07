@@ -1,3 +1,8 @@
+# 개발환경
+# Python 3.11.0 (main, Oct 24 2022, 18:26:48)
+# vscode 1.73.1 (user setup)
+# 조병하 2021136124
+
 import msvcrt
 import random
 import time
