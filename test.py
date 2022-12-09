@@ -1,21 +1,16 @@
-import paho.mqtt.client as mqtt
+import msvcrt
 
-def on_connect(client, userdata, flags, rc):
-    print("connected with result code " + str(rc))
-    client.subscribe("home/light")
+def getKey() -> str:
+    buf = msvcrt.getch()
+    print("test", list(buf))
+    if list(buf) == [224]:
+        a = list(msvcrt.getch())[0]
+        if a == 72: return "up"
+        elif a == 75: return "left"
+        elif a == 77: return "right"
+        elif a == 80: return "down"
+    elif list(buf) == [13]:
+        return "enter"
 
-def on_message(client, userdata, msg):
-    print("Topic: " + msg.topic + " Message: " + str(msg.payload))
-
-client = mqtt.Client()
-client.on_connect = on_connect
-client.on_message = on_message
-
-client.connect("192.168.240.202", 1883, 60)
-
-try:
-    client.loop_forever()
-except KeyboardInterrupt:
-    print("Finished!")
-    client.unsubscribe("home/light")
-    client.disconnect()
+while True:
+    print(getKey())
