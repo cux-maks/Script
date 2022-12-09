@@ -408,7 +408,7 @@ while start_idx:
 
         while True:
             print_start()
-            print(f"게임 모드를 선택하시오. (맵 크기: {input_mapSize} / 난이도: {input_dif})")
+            print(f"게임 모드를 선택하시오. (맵 크기: {input_mapSize} / 난이도: {dif_list[input_dif]})")
             list_1 = ["> 직접 플레이", "  직접 플레이(시간 측정)", "  랜덤 입력"]
             list_2 = ["  직접 플레이", "> 직접 플레이(시간 측정)", "  랜덤 입력"]
             list_3 = ["  직접 플레이", "  직접 플레이(시간 측정)", "> 랜덤 입력"]
